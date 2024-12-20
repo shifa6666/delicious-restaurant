@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Reset and Transition */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            /* Ensure box-sizing is applied universally */
+            transition: all 0.5s;
+        }
+
+        /* Header Section */
+        header {
+            
+            width: 100%;
+            height: 100px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5%;
+            /* Adding horizontal padding for spacing */
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .header-buttons {
+            width: 160px;
+            /* Increased width */
+            height: 50px;
+            /* Height of the buttons */
+            padding: 0 20px;
+            /* Horizontal padding */
+            font-size: 18px;
+            /* Font size */
+            border: 2px solid teal;
+            border-radius: 5px;
+            color: teal;
+            background: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            /* Ensures the text is centered */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            /* Space between buttons */
+        }
+
+        .header-buttons:hover {
+            color: aqua;
+            border: 2px solid gray;
+            box-shadow: 0px 0px 10px 7px teal;
+        }
+
+        #admin_button {
+            width: 160px;
+            /* Admin button with same width */
+            height: 55px;
+            font-size: 20px;
+            border: 2px solid teal;
+            border-radius: 5px;
+            color: teal;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #admin_button:hover {
+            color: aqua;
+            border: 2px solid gray;
+            box-shadow: 0px 0px 10px 7px teal;
+        }
+
+        /* Hero Section */
+        #home {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            /* Full height of the viewport */
+        }
+
+        .hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero img {
+            width: 100vw;
+            /* Full width of the viewport */
+            height: 100vh;
+            object-fit: cover;
+            position: absolute;
+            transform: translateX(100%);
+            /* Start off-screen */
+            animation: slideImage 6s infinite;
+        }
+
+        /* Keyframes for sliding images */
+        @keyframes slideImage {
+            0% {
+                transform: translateX(100%);
+            }
+
+            20% {
+                transform: translateX(0);
+            }
+
+            40% {
+                transform: translateX(0);
+            }
+
+            60% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(-200%);
+            }
+        }
+
+        .hero img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .hero img:nth-child(2) {
+            animation-delay: 2.5s;
+        }
+
+        .hero img:nth-child(3) {
+            animation-delay: 4.9s;
+        }
+
+        .hero img:nth-child(4) {
+            animation-delay: 7.3s;
+        }
+
+        /* Hero text overlay */
+        .hero-text {
+            position: absolute;
+            font-size: 30px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        /* Menu Section */
+        #menu {
+            padding: 50px 10%;
+            text-align: center;
+        }
+
+        #menu h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .menu-items {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .menu-item {
+            width: 200px;
+            text-align: center;
+            box-shadow: 0px 0px 10px 7px black;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-item img {
+    width: 100%;
+    height: 200px; /* Set a consistent height */
+    object-fit: cover; /* Ensure the image covers the space without stretching */
+    border-radius: 8px;
+}
+
+        .menu-item h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .menu-item span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .order-btn {
+            width: 100%;
+            height: 40px;
+            background-color: teal;
+            color: white;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .order-btn:hover {
+            background-color: darkgreen;
+            transform: scale(1.1);
+        }
+
+        /* Cart Section */
+        #cart-items {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #cart-items ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            margin: 5px 0;
+        }
+
+        #cart-items .remove-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+
+        .total-cost {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #place-order-btn {
+            width: 200px;
+            height: 50px;
+            font-size: 18px;
+            font-family: fantasy;
+            background-color: lawngreen;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        #place-order-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* About Section */
+        #about {
+            padding: 50px 10%;
+            text-align: center;
+        }
+
+        #about h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 1.2em;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 50px 10%;
+            text-align: center;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #contact input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1em;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #contact button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            background-color: teal;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #contact button:hover {
+            background-color: darkgreen;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <ul>
+                <li><a class="header-buttons" href="#home">Home</a></li>
+                <li><a class="header-buttons" href="#menu">Menu</a></li>
+                <li><a class="header-buttons" href="#about">About</a></li>
+                <li><a class="header-buttons" href="#contact">Contact</a></li>
+                <li>
+                    <button id="admin_button" onclick="window.location.href='adminLogin.php';">Admin</button>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="hero">
+            <img src="img2.jpg" alt="Image 1">
+            <img src="img3.webp" alt="Image 2">
+            <img src="img4.webp" alt="Image 3">
+            <img src="Restaurant-Interior.jpg" alt="Image 3">
+        </div>
+        <div class="hero-text">
+            <h1>Welcome to Delicious Bites</h1>
+            <p>Where taste meets quality!</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-items">
+            <div class="menu-item">
+                <img src="coffee.jpg" alt="Pasta">
+                <h3>Coffee</h3>
+                <p>A high acidity coffee as lively, tangy, or bright</p>
+                <p style="color: red;">Allergens:coffee bean</p>
+                <span>$5.99</span>
+                <button class="order-btn" data-item="coffee" data-price="5.99">Order Now</button>
+            </div>
+            <div class="menu-item">
+                <img src="pizza.jpg" alt="Pizza">
+                <h3>Pizza</h3>
+                <p>Delicious pizza..with extra cheese</p>
+                <p style="color: red;">Allergens:butter</p>
+                <span>$12.99</span>
+                <button class="order-btn" data-item="Pizza" data-price="12.99">Order Now</button>
+            </div>
+            <div class="menu-item">
+                <img src="burger.jpg" alt="Burger">
+                <h3>Burger</h3>
+                <p>Juicy burger with extra toppings.</p>
+                <p style="color: red;">Allergens:maida</p>
+                <span>$9.99</span>
+                <button class="order-btn" data-item="Burger" data-price="9.99">Order Now</button>
+            </div>
+            <div class="menu-item">
+                <img src="pasta.webp" alt="Pasta">
+                <h3>Pasta</h3>
+                <p>Classic pasta with rich sauce.</p>
+                <p style="color: red;">Allergens:no allergen</p>
+                <span>$11.99</span>
+                <button class="order-btn" data-item="Pasta" data-price="11.99">Order Now</button>
+            </div>
+            <div class="menu-item">
+                <img src="chiken.jpg" alt="Chicken">
+                <h3>Chicken</h3>
+                <p>Crunchy and crispy Fried chicken</p>
+                <span>$15.69</span>
+                <button class="order-btn" data-item="chicken" data-price="15.69">Order Now</button>
+            </div>
+        </div>
+        <div id="cart-items">
+            <h3>Your Cart</h3>
+            <ul id="cart-list"></ul>
+            <div class="total-cost" id="total-cost">Total: $0.00</div>
+            <button id="place-order-btn">Check Out</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At Delicious Bites, we believe that food is more than just a meal — it's an experience. Founded with a
+            passion for great taste, we are dedicated to providing our customers with a dining experience that combines
+            quality ingredients, innovative flavors, and exceptional service.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="Contact.php" id="contact-form" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input placeholder="Your message" name="response" required>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Delicious Bites. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const cart = [];
+        const cartList = document.getElementById('cart-list');
+        const totalCostElem = document.getElementById('total-cost');
+
+        // Function to update the cart UI and the total cost
+        function updateCartUI() {
+            cartList.innerHTML = ''; // Clear current cart items
+            let total = 0;
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${item.item} - $${item.price.toFixed(2)}`;
+
+                // Create remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.classList.add('remove-btn');
+                removeBtn.addEventListener('click', () => {
+                    cart.splice(index, 1);  // Remove item from cart
+                    updateCartUI();  // Update the cart UI after removal
+                });
+
+                // Append remove button to the list item
+                li.appendChild(removeBtn);
+                cartList.appendChild(li);
+
+                total += item.price; // Add price to the total
+            });
+
+            totalCostElem.textContent = `Total: ${total.toFixed(2)}`; // Update total cost
+        }
+
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.getAttribute('data-item');
+                const price = parseFloat(button.getAttribute('data-price'));
+                cart.push({ item, price });
+                alert(`${item} added to cart!`);
+                updateCartUI(); // Update cart display
+            });
+        });
+
+        document.getElementById('place-order-btn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            // Encode cart data as a URL parameter
+            const cartData = encodeURIComponent(JSON.stringify(cart));
+
+            // Redirect to the next page with cart data in the URL
+            // window.location.href = confirmOrders.html ? cart = ${cartData}
+            window.location.href =` confirmOrders.html?cart=${encodeURIComponent(cartData)}`;});
+
+        // document.getElementById('contact-form').addEventListener('submit', function(event) {
+        //     event.preventDefault();
+        //     alert('Thank you for reaching out! We will get back to you soon.');
+        // });
+
+
+        // Ensure the page scrolls smoothly when clicking navigation buttons
+        document.querySelectorAll('.header-buttons').forEach(button => {
+            button.addEventListener('click', (event) => {
+                // Prevent default link behavior
+                event.preventDefault();
+
+                // Get the target section by the href of the clicked button
+                const targetId = button.getAttribute('href').substring(1); // Remove the '#' character
+                const targetElement = document.getElementById(targetId);
+
+                // Scroll to the target section
+                targetElement.scrollIntoView({
+                    behavior: 'smooth', // Enable smooth scroll
+                    block: 'start' // Align the target at the top of the view
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

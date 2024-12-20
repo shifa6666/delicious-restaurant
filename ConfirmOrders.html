@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Confirm Your Order</h1>
+    <div id="cart-summary"></div>
+
+    <form id="order-form" method="POST" action="saveOrder.php">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <label for="mobile">Mobile:</label>
+        <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+        <input type="hidden" name="items" id="items">
+        <input type="hidden" name="status" value="Pending" id="items">
+        <input type="hidden" name="total" id="total">
+        <button type="submit">Submit Order</button>
+    </form>
+
+    <script>
+        // Retrieve cart data from the URL
+        const params = new URLSearchParams(window.location.search);
+        const cartData = params.get('cart'); // 'cart' contains JSON stringified cart data
+
+        if (cartData) {
+            try {
+                const cart = JSON.parse(decodeURIComponent(cartData));
+                const cartSummary = document.getElementById('cart-summary');
+                let total = 0;
+                let items = '';
+
+                cart.forEach(item => {
+                    items += `${item.item} ($${item.price.toFixed(2)}), `;
+                    total += item.price;
+                });
+
+                cartSummary.innerHTML = `
+                    <h3>Cart Summary</h3>
+                    <p>Items: ${items.slice(0, -2)}</p>
+                    <p>Total: $${total.toFixed(2)}</p>
+                `;
+
+                // Set hidden form inputs
+                document.getElementById('items').value = items.slice(0, -2); // Remove trailing comma
+                document.getElementById('total').value = total.toFixed(2);
+            } catch (error) {
+                console.error('Error parsing cart data:', error);
+            }
+        } else {
+            document.getElementById('cart-summary').innerHTML = '<p>Your cart is empty!</p>';
+        }
+    </script>
+</body>
+</html

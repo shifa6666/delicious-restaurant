@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .qr-container {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #admin-button{
+            width: 120px;
+            height: 50px;
+            position: absolute;
+            left: 5%;
+            top: 20%;
+        }
+        #customer-button{
+            width: 120px;
+            height: 50px;
+            position: absolute;
+            left: 5%;
+            top: 10%;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <input type="text" id="text" placeholder="Enter table ID">
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <button id="admin-button">Admin</button>
+    <button id="customer-button">Customer</button>
+
+    <div class="qr-container" id="qrResult"></div>
+
+    <script>
+        function generateQRCode() {
+            const text = document.getElementById("text").value.trim();
+            const qrContainer = document.getElementById("qrResult");
+
+            if (!text) {
+                alert("Please enter a table ID");
+                return;
+            }
+
+            // Define your restaurant website URL
+            const websiteUrl = `https://yourdomain.com/table/${encodeURIComponent(text)}`;
+
+            
+            // Generate the QR code using a public API
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(websiteUrl)}`;
+
+            // Display the QR code
+            qrContainer.innerHTML = `<img src="${qrCodeUrl}" alt="QR Code">`;
+
+            // Log for debugging
+            console.log("Generated QR Code URL:", websiteUrl);
+        }
+    </script>
+</body>
+</html>
